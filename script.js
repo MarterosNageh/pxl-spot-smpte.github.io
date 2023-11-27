@@ -31,7 +31,7 @@ function timecodeSpilt(runtime){
     let precStart=[];
     let precEnd=[];
 
-    let h=0;
+
     let m=0;
 
     let runtimeSpilt = runtime.split(":");
@@ -41,23 +41,27 @@ function timecodeSpilt(runtime){
     let total = (hour*60) + min;
     for(let i =0;i<3;i++){
         precStart[i]= Math.ceil(total *(25*(i+1)/100))-1;
-
+        let h=0;
+        //console.log(precStart[i]);
         let condition = true;
         do {
             if(precStart[i] >=60){
-                h=+1;
+                console.log("g"+h);
+                h++;
                 precStart[i]= precStart[i]-60;
+                //console.log(precStart[i]);
+                console.log(h);
             }else{
                 m= precStart[i];
-                condition =false;
+                condition=false;
                 break;
             }
         } while(condition);
         h= h.toString();
         m=m.toString();
-        if(h.length === 1){
+        if(h.length == 1){
             h = "0"+h;
-        }if(m.length ===1){
+        }if(m.length ==1){
             m="0"+m;
         }
         spot[i].innerText= h+":"+m+":00:00";
